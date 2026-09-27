@@ -1,0 +1,55 @@
+{
+  "experiment_name": "efficientnet_b0_cifar10_scope_selection",
+  "random_seed": 42,
+  "dataset": {
+    "name": "cifar10",
+    "root": "./data",
+    "download": true,
+    "num_classes": 10,
+    "image_size": 224,
+    "train_val_split": 0.8,
+    "batch_size": 64,
+    "num_workers": 0,
+    "train_split": 0.8,
+    "val_split": 0.2
+  },
+  "model": {
+    "backbone": "efficientnet_b0",
+    "pretrained": true,
+    "dropout": 0.2,
+    "num_classes": 10
+  },
+  "training": {
+    "optimizer": "adamw",
+    "learning_rate": 0.0005,
+    "weight_decay": 0.01,
+    "momentum": 0.9,
+    "lr_scheduler": "cosine",
+    "min_lr": 1e-06,
+    "search_epochs": 5,
+    "full_epochs": 15,
+    "use_amp": true,
+    "gradient_clip": 1.0
+  },
+  "selector": {
+    "method": "knee_point",
+    "utility_alpha": 0.6,
+    "cost_metric": "compound_cost",
+    "acc_threshold_delta": 0.02,
+    "time_weight": 0.5,
+    "param_weight": 0.5
+  },
+  "selection_result": {
+    "selected_strategy_id": 2,
+    "selected_strategy_name": "stage4_head",
+    "val_accuracy": 0.914,
+    "test_accuracy": 0.9072,
+    "test_loss": 0.2751970354795456,
+    "test_f1_macro": 0.907099633656905
+  },
+  "hardware": {
+    "device": "cuda",
+    "device_name": "NVIDIA GeForce RTX 3050 6GB Laptop GPU",
+    "cuda_available": true
+  }
+}

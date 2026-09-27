@@ -1,0 +1,56 @@
+{
+  "experiment_name": "resnet18_svhn_scope_selection",
+  "random_seed": 42,
+  "dataset": {
+    "name": "svhn",
+    "root": "./data",
+    "download": true,
+    "num_classes": 10,
+    "image_size": 224,
+    "train_val_split": 0.8,
+    "batch_size": 64,
+    "num_workers": 0,
+    "train_split": 0.8,
+    "val_split": 0.2
+  },
+  "model": {
+    "backbone": "resnet18",
+    "pretrained": true,
+    "dropout": 0.2,
+    "weights": "ResNet18_Weights.DEFAULT",
+    "num_classes": 10
+  },
+  "training": {
+    "optimizer": "adamw",
+    "learning_rate": 0.0005,
+    "weight_decay": 0.01,
+    "momentum": 0.9,
+    "lr_scheduler": "cosine",
+    "min_lr": 1e-06,
+    "search_epochs": 5,
+    "full_epochs": 15,
+    "use_amp": true,
+    "gradient_clip": 1.0
+  },
+  "selector": {
+    "method": "knee_point",
+    "utility_alpha": 0.6,
+    "cost_metric": "compound_cost",
+    "acc_threshold_delta": 0.02,
+    "time_weight": 0.5,
+    "param_weight": 0.5
+  },
+  "selection_result": {
+    "selected_strategy_id": 2,
+    "selected_strategy_name": "block4_head",
+    "val_accuracy": 0.9298389298389298,
+    "test_accuracy": 0.9240165949600492,
+    "test_loss": 0.282874311942701,
+    "test_f1_macro": 0.9178718945199262
+  },
+  "hardware": {
+    "device": "cuda",
+    "device_name": "NVIDIA GeForce RTX 3050 6GB Laptop GPU",
+    "cuda_available": true
+  }
+}

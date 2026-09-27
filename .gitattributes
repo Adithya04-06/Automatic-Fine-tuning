@@ -1,0 +1,4 @@
+outputs/checkpoints/selected_model.pt filter=lfs diff=lfs merge=lfs -text
+outputs_svhn/checkpoints/selected_model.pt filter=lfs diff=lfs merge=lfs -text
+outputs_vit/checkpoints/selected_model.pt filter=lfs diff=lfs merge=lfs -text
+outputs_efficientnet/checkpoints/selected_model.pt filter=lfs diff=lfs merge=lfs -text

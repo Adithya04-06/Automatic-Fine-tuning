@@ -1,0 +1,40 @@
+experiment_name: "vit_b_16_cifar10_scope_selection"
+seed: 42
+device: "cuda"
+
+dataset:
+  name: "cifar10"
+  root: "./data"
+  num_classes: 10
+  image_size: 224
+  batch_size: 32
+  train_split: 0.8
+  val_split: 0.2
+  num_workers: 0
+
+model:
+  backbone: "vit_b_16"
+  pretrained: true
+  num_classes: 10
+  dropout: 0.1
+
+training:
+  search_epochs: 5
+  optimizer: "adamw"
+  learning_rate: 0.0001
+  weight_decay: 0.01
+  lr_scheduler: "cosine"
+  min_lr: 1.0e-6
+  use_amp: true
+  gradient_clip: 1.0
+
+selector:
+  method: "knee_point"
+  utility_alpha: 0.6
+  acc_threshold_delta: 0.02
+  time_weight: 0.5
+  param_weight: 0.5
+  cost_metric: "compound_cost"
+
+logging:
+  output_dir: "./outputs_vit"

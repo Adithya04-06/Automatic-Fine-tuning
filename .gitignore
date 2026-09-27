@@ -1,0 +1,12 @@
+﻿venv/
+.venv/
+__pycache__/
+*.pyc
+.env
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Downloadable datasets
+data/train_32x32.mat
+data/test_32x32.mat
+data/cifar-10-python.tar.gz

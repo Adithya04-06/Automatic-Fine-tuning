@@ -1,0 +1,42 @@
+{
+  "experiment_name": "cifar10_resnet18_scope_selection",
+  "random_seed": 42,
+  "splits": {
+    "total_images": 50000,
+    "train_images": 40000,
+    "val_images": 10000,
+    "test_images": 10000,
+    "val_fraction": 0.2
+  },
+  "model": {
+    "backbone": "resnet18",
+    "pretrained": true,
+    "weights": "ResNet18_Weights.DEFAULT",
+    "num_classes": 10,
+    "dropout": 0.2
+  },
+  "training": {
+    "epochs": 5,
+    "batch_size": 64,
+    "optimizer": "adamw",
+    "learning_rate": 0.0005,
+    "weight_decay": 0.01,
+    "lr_scheduler": "cosine",
+    "use_amp": true
+  },
+  "selection": {
+    "selected_strategy_id": 2,
+    "selected_strategy_name": "block4_head",
+    "reasoning": "Knee-point / Maximum curvature selection: Strategy 2 (block4_head) provides the maximum marginal accuracy gain before diminishing returns set in.",
+    "val_accuracy": 0.9344,
+    "test_accuracy": 0.9081,
+    "test_loss": 0.2899861772656441,
+    "test_f1_macro": 0.9078048364459479,
+    "checkpoint_path": "./outputs\\checkpoints\\selected_model.pt"
+  },
+  "hardware": {
+    "device": "cuda",
+    "device_name": "NVIDIA GeForce RTX 3050 6GB Laptop GPU",
+    "cuda_available": true
+  }
+}

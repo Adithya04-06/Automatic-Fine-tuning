@@ -1,0 +1,143 @@
+2026-08-30 14:05:27 | INFO    | AutoScopeSelector | Using compute device: cpu (CPU)
+2026-08-30 14:05:27 | INFO    | AutoScopeSelector | Preparing dataset: CIFAR10 (subset: 0.005)
+2026-08-30 14:07:55 | INFO    | AutoScopeSelector | Using compute device: cpu (CPU)
+2026-08-30 14:07:55 | INFO    | AutoScopeSelector | Preparing dataset: SYNTHETIC (subset: 100%)
+2026-08-30 14:07:55 | INFO    | AutoScopeSelector | Dataset ready. Train batches: 13 | Val batches: 4 | Test batches: 4
+2026-08-30 14:07:55 | INFO    | AutoScopeSelector | Starting Fine-Tuning Scope Search across 5 strategies (1 epochs each)...
+2026-08-30 14:08:14 | INFO    | AutoScopeSelector | --- Evaluating Strategy 1: head_only (Linear probing (Classification head only)) ---
+2026-08-30 14:08:14 | INFO    | AutoScopeSelector | Trainable params: 5,130 / 11,181,642 (0.05%)
+2026-08-30 14:08:51 | INFO    | AutoScopeSelector | Epoch 01/01 | Train Loss: 2.4443 | Val Loss: 2.3735 | Val Acc: 10.00% | Time: 28.84s
+2026-08-30 14:09:01 | INFO    | AutoScopeSelector | --- Evaluating Strategy 2: block4_head (Last residual block (layer4) + Classification head) ---
+2026-08-30 14:09:01 | INFO    | AutoScopeSelector | Trainable params: 8,398,858 / 11,181,642 (75.11%)
+2026-08-30 14:09:56 | INFO    | AutoScopeSelector | Epoch 01/01 | Train Loss: 2.4537 | Val Loss: 2.6760 | Val Acc: 9.00% | Time: 41.52s
+2026-08-30 14:10:04 | INFO    | AutoScopeSelector | --- Evaluating Strategy 3: block3_4_head (Last 2 residual blocks (layer3, layer4) + Classification head) ---
+2026-08-30 14:10:04 | INFO    | AutoScopeSelector | Trainable params: 10,498,570 / 11,181,642 (93.89%)
+2026-08-30 14:10:30 | INFO    | AutoScopeSelector | Epoch 01/01 | Train Loss: 2.4529 | Val Loss: 2.6278 | Val Acc: 11.00% | Time: 18.94s
+2026-08-30 14:10:37 | INFO    | AutoScopeSelector | --- Evaluating Strategy 4: block2_3_4_head (Last 3 residual blocks (layer2, layer3, layer4) + Classification head) ---
+2026-08-30 14:10:37 | INFO    | AutoScopeSelector | Trainable params: 11,024,138 / 11,181,642 (98.59%)
+2026-08-30 14:11:08 | INFO    | AutoScopeSelector | Epoch 01/01 | Train Loss: 2.4747 | Val Loss: 2.6882 | Val Acc: 9.00% | Time: 22.67s
+2026-08-30 14:11:15 | INFO    | AutoScopeSelector | --- Evaluating Strategy 5: full_model (Full model fine-tuning (All layers unfrozen)) ---
+2026-08-30 14:11:15 | INFO    | AutoScopeSelector | Trainable params: 11,181,642 / 11,181,642 (100.00%)
+2026-08-30 14:11:50 | INFO    | AutoScopeSelector | Epoch 01/01 | Train Loss: 2.4792 | Val Loss: 2.5882 | Val Acc: 11.00% | Time: 27.26s
+2026-08-30 14:11:56 | INFO    | AutoScopeSelector | === Selection Complete ===
+2026-08-30 14:11:56 | INFO    | AutoScopeSelector | Recommended Strategy: [3] block3_4_head
+2026-08-30 14:11:56 | INFO    | AutoScopeSelector | Reasoning: Knee-point / Maximum curvature selection: Strategy 3 (block3_4_head) provides the maximum marginal accuracy gain before diminishing returns set in.
+2026-08-30 14:11:56 | INFO    | AutoScopeSelector | 
+================================================================================
+STRATEGY EVALUATION SUMMARY
+================================================================================
+| ID | Strategy Name   | Trainable Params | Param % | Val Acc (%) | Val Loss | Val F1 | Epoch Time (s) | Cost  | Pareto |
+| -- | --------------- | ---------------- | ------- | ----------- | -------- | ------ | -------------- | ----- | ------ |
+| 1  | head_only       | 5,130            | 0.05%   | 10.00%      | 2.3735   | 0.0370 | 28.84s         | 0.219 | Yes    |
+| 2  | block4_head     | 8,398,858        | 75.11%  | 9.00%       | 2.6760   | 0.0424 | 41.52s         | 0.876 | No     |
+| 3  | block3_4_head   | 10,498,570       | 93.89%  | 11.00%      | 2.6278   | 0.0533 | 18.94s         | 0.469 | Yes    |
+| 4  | block2_3_4_head | 11,024,138       | 98.59%  | 9.00%       | 2.6882   | 0.0168 | 22.67s         | 0.575 | No     |
+| 5  | full_model      | 11,181,642       | 100.00% | 11.00%      | 2.5882   | 0.0541 | 27.26s         | 0.684 | No     |
+================================================================================
+2026-08-30 14:11:56 | INFO    | AutoScopeSelector | Saved results to: ./outputs\results\selection_results.json
+2026-08-30 14:11:59 | INFO    | AutoScopeSelector | Saved Pareto Frontier plot to: ./outputs\figures\pareto_frontier.png
+2026-08-30 14:19:58 | INFO    | AutoScopeSelector | Using compute device: cpu (CPU)
+2026-08-30 14:19:58 | INFO    | AutoScopeSelector | Preparing dataset: CIFAR10 (subset: 0.05)
+2026-08-30 14:20:00 | INFO    | AutoScopeSelector | Dataset ready. Train batches: 32 | Val batches: 8 | Test batches: 157
+2026-08-30 14:20:00 | INFO    | AutoScopeSelector | Starting Fine-Tuning Scope Search across 5 strategies (2 epochs each)...
+2026-08-30 14:20:00 | INFO    | AutoScopeSelector | --- Evaluating Strategy 1: head_only (Linear probing (Classification head only)) ---
+2026-08-30 14:20:00 | INFO    | AutoScopeSelector | Trainable params: 5,130 / 11,181,642 (0.05%)
+2026-08-30 14:21:08 | INFO    | AutoScopeSelector | Epoch 01/02 | Train Loss: 2.2650 | Val Loss: 1.9920 | Val Acc: 28.80% | Time: 49.37s
+2026-08-30 14:22:14 | INFO    | AutoScopeSelector | Epoch 02/02 | Train Loss: 1.8975 | Val Loss: 1.8011 | Val Acc: 42.20% | Time: 48.00s
+2026-08-30 14:25:34 | INFO    | AutoScopeSelector | Strategy 1 Test Results -> Acc: 46.64% | Loss: 1.7564 | F1: 0.4574
+2026-08-30 14:25:34 | INFO    | AutoScopeSelector | --- Evaluating Strategy 2: block4_head (Last residual block (layer4) + Classification head) ---
+2026-08-30 14:25:34 | INFO    | AutoScopeSelector | Trainable params: 8,398,858 / 11,181,642 (75.11%)
+2026-08-30 14:26:53 | INFO    | AutoScopeSelector | Epoch 01/02 | Train Loss: 0.9772 | Val Loss: 0.7594 | Val Acc: 74.20% | Time: 60.07s
+2026-08-30 14:28:10 | INFO    | AutoScopeSelector | Epoch 02/02 | Train Loss: 0.3199 | Val Loss: 0.5837 | Val Acc: 79.80% | Time: 57.94s
+2026-08-30 14:31:29 | INFO    | AutoScopeSelector | Strategy 2 Test Results -> Acc: 81.90% | Loss: 0.5342 | F1: 0.8181
+2026-08-30 14:31:29 | INFO    | AutoScopeSelector | --- Evaluating Strategy 3: block3_4_head (Last 2 residual blocks (layer3, layer4) + Classification head) ---
+2026-08-30 14:31:29 | INFO    | AutoScopeSelector | Trainable params: 10,498,570 / 11,181,642 (93.89%)
+2026-08-30 14:32:58 | INFO    | AutoScopeSelector | Epoch 01/02 | Train Loss: 0.9874 | Val Loss: 0.6640 | Val Acc: 77.20% | Time: 70.94s
+2026-08-30 14:34:26 | INFO    | AutoScopeSelector | Epoch 02/02 | Train Loss: 0.3167 | Val Loss: 0.6282 | Val Acc: 78.00% | Time: 68.89s
+2026-08-30 14:37:48 | INFO    | AutoScopeSelector | Strategy 3 Test Results -> Acc: 79.35% | Loss: 0.6127 | F1: 0.7906
+2026-08-30 14:37:48 | INFO    | AutoScopeSelector | --- Evaluating Strategy 4: block2_3_4_head (Last 3 residual blocks (layer2, layer3, layer4) + Classification head) ---
+2026-08-30 14:37:48 | INFO    | AutoScopeSelector | Trainable params: 11,024,138 / 11,181,642 (98.59%)
+2026-08-30 14:39:32 | INFO    | AutoScopeSelector | Epoch 01/02 | Train Loss: 0.9819 | Val Loss: 1.7328 | Val Acc: 55.60% | Time: 84.93s
+2026-08-30 14:41:15 | INFO    | AutoScopeSelector | Epoch 02/02 | Train Loss: 0.3553 | Val Loss: 0.6040 | Val Acc: 79.20% | Time: 84.68s
+2026-08-30 14:44:40 | INFO    | AutoScopeSelector | Strategy 4 Test Results -> Acc: 79.89% | Loss: 0.5942 | F1: 0.7984
+2026-08-30 14:44:40 | INFO    | AutoScopeSelector | --- Evaluating Strategy 5: full_model (Full model fine-tuning (All layers unfrozen)) ---
+2026-08-30 14:44:40 | INFO    | AutoScopeSelector | Trainable params: 11,181,642 / 11,181,642 (100.00%)
+2026-08-30 14:46:49 | INFO    | AutoScopeSelector | Epoch 01/02 | Train Loss: 1.0641 | Val Loss: 1.0323 | Val Acc: 65.40% | Time: 111.07s
+2026-08-30 14:48:59 | INFO    | AutoScopeSelector | Epoch 02/02 | Train Loss: 0.4181 | Val Loss: 0.5470 | Val Acc: 81.60% | Time: 111.78s
+2026-08-30 14:52:11 | INFO    | AutoScopeSelector | Strategy 5 Test Results -> Acc: 82.04% | Loss: 0.5478 | F1: 0.8207
+2026-08-30 14:52:11 | INFO    | AutoScopeSelector | === Selection Complete ===
+2026-08-30 14:52:11 | INFO    | AutoScopeSelector | Recommended Strategy: [2] block4_head
+2026-08-30 14:52:11 | INFO    | AutoScopeSelector | Reasoning: Knee-point / Maximum curvature selection: Strategy 2 (block4_head) provides the maximum marginal accuracy gain before diminishing returns set in.
+2026-08-30 14:52:11 | INFO    | AutoScopeSelector | 
+================================================================================
+STRATEGY EVALUATION SUMMARY
+================================================================================
+| ID | Strategy Name   | Trainable Params | Param % | Val Acc (%) | Test Acc (%) | Val Loss | Val F1 | Epoch Time (s) | Cost  | Pareto |
+| -- | --------------- | ---------------- | ------- | ----------- | ------------ | -------- | ------ | -------------- | ----- | ------ |
+| 1  | head_only       | 5,130            | 0.05%   | 42.20%      | 46.64%       | 1.8011   | 0.4169 | 48.69s         | 0.000 | Yes    |
+| 2  | block4_head     | 8,398,858        | 75.11%  | 79.80%      | 81.90%       | 0.5837   | 0.7966 | 59.00s         | 0.458 | Yes    |
+| 3  | block3_4_head   | 10,498,570       | 93.89%  | 78.00%      | 79.35%       | 0.6282   | 0.7754 | 69.91s         | 0.639 | No     |
+| 4  | block2_3_4_head | 11,024,138       | 98.59%  | 79.20%      | 79.89%       | 0.6040   | 0.7902 | 84.81s         | 0.781 | No     |
+| 5  | full_model      | 11,181,642       | 100.00% | 81.60%      | 82.04%       | 0.5470   | 0.8163 | 111.42s        | 1.000 | Yes    |
+================================================================================
+2026-08-30 14:52:11 | INFO    | AutoScopeSelector | Saved results to: ./outputs\results\selection_results.json
+2026-08-30 14:52:11 | INFO    | AutoScopeSelector | Saved Pareto Frontier plot to: ./outputs\figures\pareto_frontier.png
+2026-08-30 18:58:47 | INFO    | AutoScopeSelector | Using compute device: cuda (NVIDIA GeForce RTX 3050 6GB Laptop GPU)
+2026-08-30 18:58:47 | INFO    | AutoScopeSelector | Preparing dataset: CIFAR10 (subset: 100%)
+2026-08-30 18:58:49 | INFO    | AutoScopeSelector | Dataset ready. Train batches: 625 | Val batches: 157 | Test batches: 157
+2026-08-30 18:58:49 | INFO    | AutoScopeSelector | Starting Fine-Tuning Scope Search across 5 strategies (5 epochs each)...
+2026-08-30 18:58:49 | INFO    | AutoScopeSelector | NOTE: Automatic selection is strictly performed using Validation metrics to prevent test-set leakage.
+2026-08-30 18:58:49 | INFO    | AutoScopeSelector | --- Evaluating Strategy 1: head_only (Linear probing (Classification head only)) ---
+2026-08-30 18:58:49 | INFO    | AutoScopeSelector | Trainable params: 5,130 / 11,181,642 (0.05%)
+2026-08-30 19:00:07 | INFO    | AutoScopeSelector | Epoch 01/05 | Train Loss: 1.0815 | Val Loss: 0.6890 | Val Acc: 77.88% | Time: 55.11s
+2026-08-30 19:01:21 | INFO    | AutoScopeSelector | Epoch 02/05 | Train Loss: 0.7590 | Val Loss: 0.6290 | Val Acc: 78.62% | Time: 52.75s
+2026-08-30 19:02:24 | INFO    | AutoScopeSelector | Epoch 03/05 | Train Loss: 0.7177 | Val Loss: 0.6007 | Val Acc: 79.74% | Time: 43.91s
+2026-08-30 19:03:29 | INFO    | AutoScopeSelector | Epoch 04/05 | Train Loss: 0.7077 | Val Loss: 0.5935 | Val Acc: 79.91% | Time: 45.03s
+2026-08-30 19:04:34 | INFO    | AutoScopeSelector | Epoch 05/05 | Train Loss: 0.6992 | Val Loss: 0.5872 | Val Acc: 79.92% | Time: 44.42s
+2026-08-30 19:04:54 | INFO    | AutoScopeSelector | --- Evaluating Strategy 2: block4_head (Last residual block (layer4) + Classification head) ---
+2026-08-30 19:04:54 | INFO    | AutoScopeSelector | Trainable params: 8,398,858 / 11,181,642 (75.11%)
+2026-08-30 19:06:03 | INFO    | AutoScopeSelector | Epoch 01/05 | Train Loss: 0.4548 | Val Loss: 0.3191 | Val Acc: 89.08% | Time: 48.27s
+2026-08-30 19:07:11 | INFO    | AutoScopeSelector | Epoch 02/05 | Train Loss: 0.2628 | Val Loss: 0.2835 | Val Acc: 90.52% | Time: 47.68s
+2026-08-30 19:08:17 | INFO    | AutoScopeSelector | Epoch 03/05 | Train Loss: 0.1658 | Val Loss: 0.2473 | Val Acc: 91.71% | Time: 46.59s
+2026-08-30 19:09:24 | INFO    | AutoScopeSelector | Epoch 04/05 | Train Loss: 0.0932 | Val Loss: 0.2241 | Val Acc: 92.58% | Time: 46.38s
+2026-08-30 19:10:31 | INFO    | AutoScopeSelector | Epoch 05/05 | Train Loss: 0.0522 | Val Loss: 0.2100 | Val Acc: 93.44% | Time: 47.37s
+2026-08-30 19:10:50 | INFO    | AutoScopeSelector | --- Evaluating Strategy 3: block3_4_head (Last 2 residual blocks (layer3, layer4) + Classification head) ---
+2026-08-30 19:10:50 | INFO    | AutoScopeSelector | Trainable params: 10,498,570 / 11,181,642 (93.89%)
+2026-08-30 19:12:05 | INFO    | AutoScopeSelector | Epoch 01/05 | Train Loss: 0.4565 | Val Loss: 0.3708 | Val Acc: 87.74% | Time: 55.04s
+2026-08-30 19:13:19 | INFO    | AutoScopeSelector | Epoch 02/05 | Train Loss: 0.2639 | Val Loss: 0.3209 | Val Acc: 88.75% | Time: 55.10s
+2026-08-30 19:14:34 | INFO    | AutoScopeSelector | Epoch 03/05 | Train Loss: 0.1665 | Val Loss: 0.2428 | Val Acc: 91.96% | Time: 55.12s
+2026-08-30 19:15:48 | INFO    | AutoScopeSelector | Epoch 04/05 | Train Loss: 0.0901 | Val Loss: 0.1809 | Val Acc: 94.14% | Time: 55.28s
+2026-08-30 20:32:53 | INFO    | AutoScopeSelector | Epoch 05/05 | Train Loss: 0.0406 | Val Loss: 0.1687 | Val Acc: 94.74% | Time: 4603.85s
+2026-08-30 20:33:14 | INFO    | AutoScopeSelector | --- Evaluating Strategy 4: block2_3_4_head (Last 3 residual blocks (layer2, layer3, layer4) + Classification head) ---
+2026-08-30 20:33:14 | INFO    | AutoScopeSelector | Trainable params: 11,024,138 / 11,181,642 (98.59%)
+2026-08-30 20:34:41 | INFO    | AutoScopeSelector | Epoch 01/05 | Train Loss: 0.4665 | Val Loss: 0.3853 | Val Acc: 86.59% | Time: 67.48s
+2026-08-30 20:36:02 | INFO    | AutoScopeSelector | Epoch 02/05 | Train Loss: 0.2730 | Val Loss: 0.2978 | Val Acc: 90.12% | Time: 61.23s
+2026-08-30 20:37:32 | INFO    | AutoScopeSelector | Epoch 03/05 | Train Loss: 0.1676 | Val Loss: 0.2378 | Val Acc: 92.17% | Time: 67.03s
+2026-08-30 20:39:00 | INFO    | AutoScopeSelector | Epoch 04/05 | Train Loss: 0.0865 | Val Loss: 0.1716 | Val Acc: 94.39% | Time: 66.32s
+2026-08-30 20:40:29 | INFO    | AutoScopeSelector | Epoch 05/05 | Train Loss: 0.0433 | Val Loss: 0.1438 | Val Acc: 95.25% | Time: 66.83s
+2026-08-30 20:40:53 | INFO    | AutoScopeSelector | --- Evaluating Strategy 5: full_model (Full model fine-tuning (All layers unfrozen)) ---
+2026-08-30 20:40:53 | INFO    | AutoScopeSelector | Trainable params: 11,181,642 / 11,181,642 (100.00%)
+2026-08-30 20:42:51 | INFO    | AutoScopeSelector | Epoch 01/05 | Train Loss: 0.4903 | Val Loss: 0.3729 | Val Acc: 87.35% | Time: 95.19s
+2026-08-30 20:44:52 | INFO    | AutoScopeSelector | Epoch 02/05 | Train Loss: 0.2897 | Val Loss: 0.2813 | Val Acc: 90.26% | Time: 98.52s
+2026-08-30 20:46:53 | INFO    | AutoScopeSelector | Epoch 03/05 | Train Loss: 0.1783 | Val Loss: 0.2546 | Val Acc: 91.52% | Time: 99.36s
+2026-08-30 20:48:53 | INFO    | AutoScopeSelector | Epoch 04/05 | Train Loss: 0.0957 | Val Loss: 0.1531 | Val Acc: 94.96% | Time: 96.89s
+2026-08-30 20:50:51 | INFO    | AutoScopeSelector | Epoch 05/05 | Train Loss: 0.0400 | Val Loss: 0.1384 | Val Acc: 95.45% | Time: 95.30s
+2026-08-30 20:51:12 | INFO    | AutoScopeSelector | === Selection Complete ===
+2026-08-30 20:51:12 | INFO    | AutoScopeSelector | Recommended Strategy: [2] block4_head
+2026-08-30 20:51:12 | INFO    | AutoScopeSelector | Reasoning: Knee-point / Maximum curvature selection: Strategy 2 (block4_head) provides the maximum marginal accuracy gain before diminishing returns set in.
+2026-08-30 20:51:12 | INFO    | AutoScopeSelector | --- Running Post-Selection Test Evaluation on Selected Strategy [2]: block4_head ---
+2026-08-30 20:57:41 | INFO    | AutoScopeSelector | Final Test Evaluation Result -> Accuracy: 90.75% | Loss: 0.2923 | F1: 0.9074
+2026-08-30 20:57:41 | INFO    | AutoScopeSelector | 
+================================================================================
+STRATEGY EVALUATION SUMMARY (Validation Search)
+================================================================================
+| ID | Strategy Name   | Trainable Params | Param % | Val Acc (%) | Test Acc (%) | Val Loss | Val F1 | Epoch Time (s) | Cost  | Pareto |
+| -- | --------------- | ---------------- | ------- | ----------- | ------------ | -------- | ------ | -------------- | ----- | ------ |
+| 1  | head_only       | 5,130            | 0.05%   | 79.92%      | 0.00%        | 0.5872   | 0.7983 | 48.24s         | 0.001 | Yes    |
+| 2  | block4_head     | 8,398,858        | 75.11%  | 93.44%      | 90.75%       | 0.2100   | 0.9340 | 47.26s         | 0.376 | Yes    |
+| 3  | block3_4_head   | 10,498,570       | 93.89%  | 94.74%      | 0.00%        | 0.1687   | 0.9472 | 964.88s        | 0.969 | No     |
+| 4  | block2_3_4_head | 11,024,138       | 98.59%  | 95.25%      | 0.00%        | 0.1438   | 0.9523 | 65.78s         | 0.503 | Yes    |
+| 5  | full_model      | 11,181,642       | 100.00% | 95.45%      | 0.00%        | 0.1384   | 0.9544 | 97.05s         | 0.527 | Yes    |
+================================================================================
+2026-08-30 20:57:41 | INFO    | AutoScopeSelector | Saved results to: ./outputs\results\selection_results.json
+2026-08-30 20:57:43 | INFO    | AutoScopeSelector | Saved all 5 experiment comparison figures to: ./outputs\figures

@@ -1,0 +1,32 @@
+2026-08-30 21:01:09 | INFO    | AuditRunner | === Starting Strategy 3 Timing Correction & Reproducibility Audit ===
+2026-08-30 21:01:09 | INFO    | AuditRunner | Compute Device: cuda (NVIDIA GeForce RTX 3050 6GB Laptop GPU)
+2026-08-30 21:01:11 | INFO    | AuditRunner | Dataset ready. Train: 625 batches | Val: 157 batches | Test: 157 batches
+2026-08-30 21:01:11 | INFO    | AuditRunner | Evaluating Strategy 3 (block3_4_head) with monotonic high-precision timing...
+2026-08-30 21:01:11 | INFO    | AuditRunner | --- Evaluating Strategy 3: block3_4_head (Last 2 residual blocks (layer3, layer4) + Classification head) ---
+2026-08-30 21:01:11 | INFO    | AuditRunner | Trainable params: 10,498,570 / 11,181,642 (93.89%)
+2026-08-30 21:03:17 | INFO    | AuditRunner | Epoch 01/05 | Train Loss: 0.4565 | Val Loss: 0.3843 | Val Acc: 86.77% | Time: 105.63s
+2026-08-30 21:05:15 | INFO    | AuditRunner | Epoch 02/05 | Train Loss: 0.2630 | Val Loss: 0.2708 | Val Acc: 91.01% | Time: 98.82s
+2026-08-30 21:07:16 | INFO    | AuditRunner | Epoch 03/05 | Train Loss: 0.1645 | Val Loss: 0.2424 | Val Acc: 91.93% | Time: 99.85s
+2026-08-30 21:09:16 | INFO    | AuditRunner | Epoch 04/05 | Train Loss: 0.0860 | Val Loss: 0.2016 | Val Acc: 93.63% | Time: 99.88s
+2026-08-30 21:11:57 | INFO    | AuditRunner | Epoch 05/05 | Train Loss: 0.0464 | Val Loss: 0.1786 | Val Acc: 94.36% | Time: 138.16s
+2026-08-30 21:12:19 | INFO    | AuditRunner | Strategy 3 Corrected Result -> Val Acc: 94.36% | Mean Epoch Time: 108.47s
+2026-08-30 21:12:19 | INFO    | AuditRunner | === Selection Complete ===
+2026-08-30 21:12:19 | INFO    | AuditRunner | Recommended Strategy: [2] block4_head
+2026-08-30 21:12:19 | INFO    | AuditRunner | Reasoning: Knee-point / Maximum curvature selection: Strategy 2 (block4_head) provides the maximum marginal accuracy gain before diminishing returns set in.
+2026-08-30 21:12:19 | INFO    | AuditRunner | --- Post-Selection: Final Evaluation & Checkpointing for Strategy [2]: block4_head ---
+2026-08-30 21:20:25 | INFO    | AuditRunner | Saved model checkpoint to: ./outputs\checkpoints\selected_model.pt
+2026-08-30 21:20:25 | INFO    | AuditRunner | Saved corrected selection results to: ./outputs\results\selection_results.json
+2026-08-30 21:20:25 | INFO    | AuditRunner | Saved reproducibility metadata to: ./outputs\results\reproducibility_metadata.json
+2026-08-30 21:20:26 | INFO    | AuditRunner | Saved regenerated comparison plots to outputs/figures/
+2026-08-30 21:20:26 | INFO    | AuditRunner | 
+================================================================================
+CORRECTED EXPERIMENT RESULTS SUMMARY
+================================================================================
+| ID | Strategy Name   | Trainable Params | Param % | Val Acc (%) | Test Acc (%) | Val Loss | Val F1 | Epoch Time (s) | Cost  | Pareto |
+| -- | --------------- | ---------------- | ------- | ----------- | ------------ | -------- | ------ | -------------- | ----- | ------ |
+| 1  | head_only       | 5,130            | 0.05%   | 79.92%      | 0.00%        | 0.5872   | 0.7983 | 48.24s         | 0.008 | Yes    |
+| 2  | block4_head     | 8,398,858        | 75.11%  | 93.44%      | 90.81%       | 0.2100   | 0.9340 | 47.26s         | 0.376 | Yes    |
+| 3  | block3_4_head   | 10,498,570       | 93.89%  | 94.36%      | 0.00%        | 0.1786   | 0.9435 | 108.47s        | 0.969 | No     |
+| 4  | block2_3_4_head | 11,024,138       | 98.59%  | 95.25%      | 0.00%        | 0.1438   | 0.9523 | 65.78s         | 0.644 | Yes    |
+| 5  | full_model      | 11,181,642       | 100.00% | 95.45%      | 0.00%        | 0.1384   | 0.9544 | 97.05s         | 0.907 | Yes    |
+================================================================================

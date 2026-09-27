@@ -1,0 +1,49 @@
+# Base default configuration
+seed: 42
+device: "cuda"  # auto-detected to cpu if cuda is unavailable
+
+# Dataset defaults
+dataset:
+  name: "cifar10"
+  root: "./data"
+  download: true
+  num_classes: 10
+  image_size: 224
+  train_val_split: 0.8
+  batch_size: 64
+  num_workers: 2
+
+# Model defaults
+model:
+  backbone: "resnet18"
+  pretrained: true
+  dropout: 0.0
+
+# Optimization defaults
+training:
+  optimizer: "adamw"
+  learning_rate: 0.001
+  weight_decay: 0.01
+  momentum: 0.9  # used if optimizer is sgd
+  lr_scheduler: "cosine"  # 'cosine', 'step', or 'plateau'
+  min_lr: 1.0e-6
+  search_epochs: 5
+  full_epochs: 15
+  use_amp: true
+  gradient_clip: 1.0
+
+# Selector defaults
+selector:
+  method: "knee_point"  # 'knee_point', 'utility', or 'threshold'
+  utility_alpha: 0.6    # Weight for performance vs cost (1.0 = only accuracy, 0.0 = only cost)
+  cost_metric: "compound_cost"  # 'compound_cost', 'trainable_params', or 'epoch_time'
+  acc_threshold_delta: 0.02     # Tolerable accuracy drop from max accuracy (for threshold mode)
+  time_weight: 0.5      # Weight of training time in compound cost
+  param_weight: 0.5     # Weight of trainable params in compound cost
+
+# Logging and outputs
+logging:
+  output_dir: "./outputs"
+  save_plots: true
+  save_results: true
+  verbose: true

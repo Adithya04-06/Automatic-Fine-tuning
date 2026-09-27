@@ -1,0 +1,43 @@
+# ResNet-18 on CIFAR-10 experiment configuration
+experiment_name: "resnet18_cifar10_auto_selection"
+seed: 42
+device: "auto"
+
+dataset:
+  name: "cifar10"
+  root: "./data"
+  download: true
+  num_classes: 10
+  image_size: 224
+  train_val_split: 0.8
+  batch_size: 64
+  num_workers: 2
+
+model:
+  backbone: "resnet18"
+  pretrained: true
+  dropout: 0.2
+
+training:
+  optimizer: "adamw"
+  learning_rate: 0.0005
+  weight_decay: 0.01
+  lr_scheduler: "cosine"
+  search_epochs: 5
+  full_epochs: 15
+  use_amp: true
+  gradient_clip: 1.0
+
+selector:
+  method: "knee_point"
+  utility_alpha: 0.6
+  cost_metric: "compound_cost"
+  acc_threshold_delta: 0.02
+  time_weight: 0.5
+  param_weight: 0.5
+
+logging:
+  output_dir: "./outputs"
+  save_plots: true
+  save_results: true
+  verbose: true

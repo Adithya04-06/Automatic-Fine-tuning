@@ -1,0 +1,19 @@
+# Selector Algorithm parameterizations
+algorithms:
+  knee_point:
+    description: "Selects strategy with maximum distance to the chord connecting min and max cost points."
+    normalize: true
+  
+  utility:
+    description: "Weighted sum of normalized accuracy and normalized cost penalty."
+    alpha_values: [0.3, 0.5, 0.6, 0.7, 0.85]
+    default_alpha: 0.6
+  
+  threshold:
+    description: "Finds minimum cost strategy within delta accuracy drop from full fine-tuning."
+    delta_values: [0.01, 0.02, 0.05]
+    default_delta: 0.02
+
+cost_formulation:
+  time_weight: 0.5
+  param_weight: 0.5

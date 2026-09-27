@@ -1,0 +1,107 @@
+2026-08-31 11:00:56 | INFO    | AutoScopeSelector | Using compute device: cuda (NVIDIA GeForce RTX 3050 6GB Laptop GPU)
+2026-08-31 11:00:56 | INFO    | AutoScopeSelector | Preparing dataset: CIFAR10 (subset: 0.05)
+2026-08-31 11:00:57 | INFO    | AutoScopeSelector | Dataset ready. Train batches: 63 | Val batches: 16 | Test batches: 313
+2026-08-31 11:00:57 | INFO    | AutoScopeSelector | Starting Fine-Tuning Scope Search across 5 strategies (2 epochs each)...
+2026-08-31 11:00:57 | INFO    | AutoScopeSelector | NOTE: Automatic selection is strictly performed using Validation metrics to prevent test-set leakage.
+2026-08-31 11:01:02 | INFO    | AutoScopeSelector | --- Evaluating Strategy 1: head_only (Linear probing (ViT classification head only)) ---
+2026-08-31 11:01:02 | INFO    | AutoScopeSelector | Trainable params: 7,690 / 85,806,346 (0.01%)
+2026-08-31 11:01:23 | INFO    | AutoScopeSelector | Epoch 01/02 | Train Loss: 2.0848 | Val Loss: 1.7554 | Val Acc: 61.00% | Time: 14.05s
+2026-08-31 11:01:43 | INFO    | AutoScopeSelector | Epoch 02/02 | Train Loss: 1.6156 | Val Loss: 1.4941 | Val Acc: 74.40% | Time: 13.45s
+2026-08-31 11:01:50 | INFO    | AutoScopeSelector | --- Evaluating Strategy 2: top_quarter_head (Top 3 Transformer layers (layers 9-11 + LN) + Head) ---
+2026-08-31 11:01:50 | INFO    | AutoScopeSelector | Trainable params: 21,272,842 / 85,806,346 (24.79%)
+2026-08-31 11:02:15 | INFO    | AutoScopeSelector | Epoch 01/02 | Train Loss: 0.5902 | Val Loss: 0.2078 | Val Acc: 93.80% | Time: 17.96s
+2026-08-31 11:02:40 | INFO    | AutoScopeSelector | Epoch 02/02 | Train Loss: 0.0898 | Val Loss: 0.1847 | Val Acc: 95.20% | Time: 17.98s
+2026-08-31 11:02:48 | INFO    | AutoScopeSelector | --- Evaluating Strategy 3: top_half_head (Top 6 Transformer layers (layers 6-11 + LN) + Head) ---
+2026-08-31 11:02:48 | INFO    | AutoScopeSelector | Trainable params: 42,536,458 / 85,806,346 (49.57%)
+2026-08-31 11:03:17 | INFO    | AutoScopeSelector | Epoch 01/02 | Train Loss: 0.5405 | Val Loss: 0.2133 | Val Acc: 92.20% | Time: 22.59s
+2026-08-31 11:03:46 | INFO    | AutoScopeSelector | Epoch 02/02 | Train Loss: 0.0701 | Val Loss: 0.2082 | Val Acc: 92.60% | Time: 22.75s
+2026-08-31 11:03:54 | INFO    | AutoScopeSelector | --- Evaluating Strategy 4: top_three_quarters_head (Top 9 Transformer layers (layers 3-11 + LN) + Head) ---
+2026-08-31 11:03:54 | INFO    | AutoScopeSelector | Trainable params: 63,800,074 / 85,806,346 (74.35%)
+2026-08-31 11:04:29 | INFO    | AutoScopeSelector | Epoch 01/02 | Train Loss: 0.5686 | Val Loss: 0.3319 | Val Acc: 89.00% | Time: 27.59s
+2026-08-31 11:05:03 | INFO    | AutoScopeSelector | Epoch 02/02 | Train Loss: 0.0846 | Val Loss: 0.2116 | Val Acc: 94.80% | Time: 27.39s
+2026-08-31 11:05:11 | INFO    | AutoScopeSelector | --- Evaluating Strategy 5: full_model (Full model fine-tuning (All Transformer layers, Stem & Head unfrozen)) ---
+2026-08-31 11:05:11 | INFO    | AutoScopeSelector | Trainable params: 85,806,346 / 85,806,346 (100.00%)
+2026-08-31 11:05:50 | INFO    | AutoScopeSelector | Epoch 01/02 | Train Loss: 0.6259 | Val Loss: 0.2771 | Val Acc: 91.20% | Time: 32.68s
+2026-08-31 11:06:31 | INFO    | AutoScopeSelector | Epoch 02/02 | Train Loss: 0.1337 | Val Loss: 0.2169 | Val Acc: 93.00% | Time: 33.28s
+2026-08-31 11:06:38 | INFO    | AutoScopeSelector | === Selection Complete ===
+2026-08-31 11:06:38 | INFO    | AutoScopeSelector | Recommended Strategy: [2] top_quarter_head
+2026-08-31 11:06:38 | INFO    | AutoScopeSelector | Reasoning: Knee-point / Maximum curvature selection: Strategy 2 (top_quarter_head) provides the maximum marginal accuracy gain before diminishing returns set in.
+2026-08-31 11:06:38 | INFO    | AutoScopeSelector | --- Running Post-Selection Test Evaluation on Selected Strategy [2]: top_quarter_head ---
+2026-08-31 11:09:41 | INFO    | AutoScopeSelector | Final Test Evaluation Result -> Accuracy: 93.84% | Loss: 0.1952 | F1: 0.9383
+2026-08-31 11:09:41 | INFO    | AutoScopeSelector | Saved selected model checkpoint to: ./outputs_vit\checkpoints\selected_model.pt
+2026-08-31 11:09:41 | INFO    | AutoScopeSelector | 
+================================================================================
+STRATEGY EVALUATION SUMMARY (Validation Search)
+================================================================================
+| ID | Strategy Name           | Trainable Params | Param % | Val Acc (%) | Test Acc (%) | Val Loss | Val F1 | Epoch Time (s) | Cost  | Pareto |
+| -- | ----------------------- | ---------------- | ------- | ----------- | ------------ | -------- | ------ | -------------- | ----- | ------ |
+| 1  | head_only               | 7,690            | 0.01%   | 74.40%      | 0.00%        | 1.4941   | 0.7348 | 13.75s         | 0.000 | Yes    |
+| 2  | top_quarter_head        | 21,272,842       | 24.79%  | 95.20%      | 93.84%       | 0.1847   | 0.9519 | 17.97s         | 0.234 | Yes    |
+| 3  | top_half_head           | 42,536,458       | 49.57%  | 92.60%      | 0.00%        | 0.2082   | 0.9260 | 22.67s         | 0.480 | No     |
+| 4  | top_three_quarters_head | 63,800,074       | 74.35%  | 94.80%      | 0.00%        | 0.2116   | 0.9483 | 27.49s         | 0.729 | No     |
+| 5  | full_model              | 85,806,346       | 100.00% | 93.00%      | 0.00%        | 0.2169   | 0.9296 | 32.98s         | 1.000 | No     |
+================================================================================
+2026-08-31 11:09:41 | INFO    | AutoScopeSelector | Saved results to: ./outputs_vit\results\selection_results.json
+2026-08-31 11:09:41 | INFO    | AutoScopeSelector | Saved reproducibility metadata to: ./outputs_vit\results\reproducibility_metadata.json
+2026-08-31 11:09:42 | INFO    | AutoScopeSelector | Saved all 5 experiment comparison figures to: ./outputs_vit\figures
+2026-08-31 13:27:24 | INFO    | AutoScopeSelector | Using compute device: cuda (NVIDIA GeForce RTX 3050 6GB Laptop GPU)
+2026-08-31 13:27:24 | INFO    | AutoScopeSelector | Preparing dataset: CIFAR10 (subset: 100%)
+2026-08-31 13:27:25 | INFO    | AutoScopeSelector | Dataset ready. Train batches: 1250 | Val batches: 313 | Test batches: 313
+2026-08-31 13:27:25 | INFO    | AutoScopeSelector | Starting Fine-Tuning Scope Search across 5 strategies (5 epochs each)...
+2026-08-31 13:27:25 | INFO    | AutoScopeSelector | NOTE: Automatic selection is strictly performed using Validation metrics to prevent test-set leakage.
+2026-08-31 13:27:27 | INFO    | AutoScopeSelector | --- Evaluating Strategy 1: head_only (Linear probing (ViT classification head only)) ---
+2026-08-31 13:27:27 | INFO    | AutoScopeSelector | Trainable params: 7,690 / 85,806,346 (0.01%)
+2026-08-31 13:34:35 | INFO    | AutoScopeSelector | Epoch 01/05 | Train Loss: 0.5440 | Val Loss: 0.2269 | Val Acc: 93.64% | Time: 286.14s
+2026-08-31 13:41:43 | INFO    | AutoScopeSelector | Epoch 02/05 | Train Loss: 0.2089 | Val Loss: 0.1900 | Val Acc: 94.32% | Time: 286.75s
+2026-08-31 13:48:46 | INFO    | AutoScopeSelector | Epoch 03/05 | Train Loss: 0.1829 | Val Loss: 0.1761 | Val Acc: 94.57% | Time: 278.90s
+2026-08-31 13:56:04 | INFO    | AutoScopeSelector | Epoch 04/05 | Train Loss: 0.1735 | Val Loss: 0.1715 | Val Acc: 94.74% | Time: 297.20s
+2026-08-31 14:03:14 | INFO    | AutoScopeSelector | Epoch 05/05 | Train Loss: 0.1695 | Val Loss: 0.1705 | Val Acc: 94.78% | Time: 292.91s
+2026-08-31 14:05:34 | INFO    | AutoScopeSelector | --- Evaluating Strategy 2: top_quarter_head (Top 3 Transformer layers (layers 9-11 + LN) + Head) ---
+2026-08-31 14:05:34 | INFO    | AutoScopeSelector | Trainable params: 21,272,842 / 85,806,346 (24.79%)
+2026-08-31 14:14:01 | INFO    | AutoScopeSelector | Epoch 01/05 | Train Loss: 0.1685 | Val Loss: 0.1108 | Val Acc: 96.37% | Time: 366.98s
+2026-08-31 14:22:38 | INFO    | AutoScopeSelector | Epoch 02/05 | Train Loss: 0.0666 | Val Loss: 0.1113 | Val Acc: 96.58% | Time: 376.78s
+2026-08-31 14:30:59 | INFO    | AutoScopeSelector | Epoch 03/05 | Train Loss: 0.0289 | Val Loss: 0.1117 | Val Acc: 96.98% | Time: 361.72s
+2026-08-31 14:39:45 | INFO    | AutoScopeSelector | Epoch 04/05 | Train Loss: 0.0108 | Val Loss: 0.1371 | Val Acc: 96.89% | Time: 362.15s
+2026-08-31 14:54:32 | INFO    | AutoScopeSelector | Epoch 05/05 | Train Loss: 0.0040 | Val Loss: 0.1307 | Val Acc: 97.24% | Time: 473.03s
+2026-08-31 20:45:23 | INFO    | AutoScopeSelector | --- Evaluating Strategy 3: top_half_head (Top 6 Transformer layers (layers 6-11 + LN) + Head) ---
+2026-08-31 20:45:23 | INFO    | AutoScopeSelector | Trainable params: 42,536,458 / 85,806,346 (49.57%)
+2026-08-31 20:56:11 | INFO    | AutoScopeSelector | Epoch 01/05 | Train Loss: 0.1748 | Val Loss: 0.1189 | Val Acc: 96.09% | Time: 482.39s
+2026-08-31 21:07:27 | INFO    | AutoScopeSelector | Epoch 02/05 | Train Loss: 0.0699 | Val Loss: 0.1275 | Val Acc: 96.47% | Time: 509.26s
+2026-08-31 21:18:53 | INFO    | AutoScopeSelector | Epoch 03/05 | Train Loss: 0.0281 | Val Loss: 0.1170 | Val Acc: 97.18% | Time: 519.17s
+2026-08-31 21:30:11 | INFO    | AutoScopeSelector | Epoch 04/05 | Train Loss: 0.0090 | Val Loss: 0.0981 | Val Acc: 97.71% | Time: 513.66s
+2026-08-31 21:43:41 | INFO    | AutoScopeSelector | Epoch 05/05 | Train Loss: 0.0021 | Val Loss: 0.1049 | Val Acc: 97.80% | Time: 491.04s
+2026-08-31 21:46:19 | INFO    | AutoScopeSelector | --- Evaluating Strategy 4: top_three_quarters_head (Top 9 Transformer layers (layers 3-11 + LN) + Head) ---
+2026-08-31 21:46:19 | INFO    | AutoScopeSelector | Trainable params: 63,800,074 / 85,806,346 (74.35%)
+2026-08-31 21:59:06 | INFO    | AutoScopeSelector | Epoch 01/05 | Train Loss: 0.2117 | Val Loss: 0.1498 | Val Acc: 95.05% | Time: 605.15s
+2026-08-31 22:12:03 | INFO    | AutoScopeSelector | Epoch 02/05 | Train Loss: 0.0974 | Val Loss: 0.1490 | Val Acc: 95.70% | Time: 622.05s
+2026-08-31 22:24:39 | INFO    | AutoScopeSelector | Epoch 03/05 | Train Loss: 0.0433 | Val Loss: 0.1186 | Val Acc: 96.79% | Time: 605.35s
+2026-08-31 22:36:08 | INFO    | AutoScopeSelector | Epoch 04/05 | Train Loss: 0.0132 | Val Loss: 0.1153 | Val Acc: 97.57% | Time: 549.25s
+2026-08-31 22:47:29 | INFO    | AutoScopeSelector | Epoch 05/05 | Train Loss: 0.0024 | Val Loss: 0.1039 | Val Acc: 97.97% | Time: 543.52s
+2026-08-31 22:49:50 | INFO    | AutoScopeSelector | --- Evaluating Strategy 5: full_model (Full model fine-tuning (All Transformer layers, Stem & Head unfrozen)) ---
+2026-08-31 22:49:50 | INFO    | AutoScopeSelector | Trainable params: 85,806,346 / 85,806,346 (100.00%)
+2026-08-31 23:03:23 | INFO    | AutoScopeSelector | Epoch 01/05 | Train Loss: 0.2891 | Val Loss: 0.2220 | Val Acc: 92.69% | Time: 673.14s
+2026-08-31 23:16:36 | INFO    | AutoScopeSelector | Epoch 02/05 | Train Loss: 0.1685 | Val Loss: 0.2083 | Val Acc: 93.38% | Time: 650.39s
+2026-08-31 23:29:56 | INFO    | AutoScopeSelector | Epoch 03/05 | Train Loss: 0.0917 | Val Loss: 0.1556 | Val Acc: 95.36% | Time: 660.26s
+2026-08-31 23:43:39 | INFO    | AutoScopeSelector | Epoch 04/05 | Train Loss: 0.0350 | Val Loss: 0.1316 | Val Acc: 96.55% | Time: 670.71s
+2026-08-31 23:57:13 | INFO    | AutoScopeSelector | Epoch 05/05 | Train Loss: 0.0089 | Val Loss: 0.1126 | Val Acc: 97.39% | Time: 671.08s
+2026-08-31 23:59:36 | INFO    | AutoScopeSelector | === Selection Complete ===
+2026-08-31 23:59:36 | INFO    | AutoScopeSelector | Recommended Strategy: [2] top_quarter_head
+2026-08-31 23:59:36 | INFO    | AutoScopeSelector | Reasoning: Knee-point / Maximum curvature selection: Strategy 2 (top_quarter_head) provides the maximum marginal accuracy gain before diminishing returns set in.
+2026-08-31 23:59:36 | INFO    | AutoScopeSelector | --- Running Post-Selection Test Evaluation on Selected Strategy [2]: top_quarter_head ---
+2026-09-01 00:33:27 | INFO    | AutoScopeSelector | Final Test Evaluation Result -> Accuracy: 96.29% | Loss: 0.1377 | F1: 0.9631
+2026-09-01 00:33:27 | INFO    | AutoScopeSelector | Saved selected model checkpoint to: ./outputs_vit\checkpoints\selected_model.pt
+2026-09-01 00:33:27 | INFO    | AutoScopeSelector | 
+================================================================================
+STRATEGY EVALUATION SUMMARY (Validation Search)
+================================================================================
+| ID | Strategy Name           | Trainable Params | Param % | Val Acc (%) | Test Acc (%) | Val Loss | Val F1 | Epoch Time (s) | Cost  | Pareto |
+| -- | ----------------------- | ---------------- | ------- | ----------- | ------------ | -------- | ------ | -------------- | ----- | ------ |
+| 1  | head_only               | 7,690            | 0.01%   | 94.78%      | 0.00%        | 0.1705   | 0.9476 | 288.38s        | 0.000 | Yes    |
+| 2  | top_quarter_head        | 21,272,842       | 24.79%  | 97.24%      | 96.29%       | 0.1307   | 0.9722 | 388.13s        | 0.256 | Yes    |
+| 3  | top_half_head           | 42,536,458       | 49.57%  | 97.80%      | 0.00%        | 0.1049   | 0.9779 | 503.10s        | 0.533 | Yes    |
+| 4  | top_three_quarters_head | 63,800,074       | 74.35%  | 97.97%      | 0.00%        | 0.1039   | 0.9796 | 585.06s        | 0.766 | Yes    |
+| 5  | full_model              | 85,806,346       | 100.00% | 97.39%      | 0.00%        | 0.1126   | 0.9738 | 665.12s        | 1.000 | No     |
+================================================================================
+2026-09-01 00:33:28 | INFO    | AutoScopeSelector | Saved results to: ./outputs_vit\results\selection_results.json
+2026-09-01 00:33:28 | INFO    | AutoScopeSelector | Saved reproducibility metadata to: ./outputs_vit\results\reproducibility_metadata.json
+2026-09-01 00:33:31 | INFO    | AutoScopeSelector | Saved all 5 experiment comparison figures to: ./outputs_vit\figures

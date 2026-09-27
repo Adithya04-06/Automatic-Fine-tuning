@@ -1,0 +1,61 @@
+2026-08-30 21:26:05 | INFO    | AutoScopeSelector | Using compute device: cuda (NVIDIA GeForce RTX 3050 6GB Laptop GPU)
+2026-08-30 21:26:05 | INFO    | AutoScopeSelector | Preparing dataset: SVHN (subset: 100%)
+2026-08-30 21:32:03 | INFO    | AutoScopeSelector | Dataset ready. Train batches: 916 | Val batches: 229 | Test batches: 407
+2026-08-30 21:32:03 | INFO    | AutoScopeSelector | Starting Fine-Tuning Scope Search across 5 strategies (5 epochs each)...
+2026-08-30 21:32:03 | INFO    | AutoScopeSelector | NOTE: Automatic selection is strictly performed using Validation metrics to prevent test-set leakage.
+2026-08-30 21:32:03 | INFO    | AutoScopeSelector | --- Evaluating Strategy 1: head_only (Linear probing (Classification head only)) ---
+2026-08-30 21:32:03 | INFO    | AutoScopeSelector | Trainable params: 5,130 / 11,181,642 (0.05%)
+2026-08-30 21:34:34 | INFO    | AutoScopeSelector | Epoch 01/05 | Train Loss: 1.9653 | Val Loss: 1.7565 | Val Acc: 41.03% | Time: 120.82s
+2026-08-30 21:37:01 | INFO    | AutoScopeSelector | Epoch 02/05 | Train Loss: 1.8010 | Val Loss: 1.7063 | Val Acc: 42.72% | Time: 118.25s
+2026-08-30 21:39:31 | INFO    | AutoScopeSelector | Epoch 03/05 | Train Loss: 1.7675 | Val Loss: 1.6884 | Val Acc: 43.37% | Time: 120.12s
+2026-08-30 21:42:02 | INFO    | AutoScopeSelector | Epoch 04/05 | Train Loss: 1.7538 | Val Loss: 1.6736 | Val Acc: 43.67% | Time: 120.75s
+2026-08-30 21:44:31 | INFO    | AutoScopeSelector | Epoch 05/05 | Train Loss: 1.7443 | Val Loss: 1.6712 | Val Acc: 43.78% | Time: 118.72s
+2026-08-30 21:45:01 | INFO    | AutoScopeSelector | --- Evaluating Strategy 2: block4_head (Last residual block (layer4) + Classification head) ---
+2026-08-30 21:45:01 | INFO    | AutoScopeSelector | Trainable params: 8,398,858 / 11,181,642 (75.11%)
+2026-08-30 21:47:41 | INFO    | AutoScopeSelector | Epoch 01/05 | Train Loss: 0.5068 | Val Loss: 0.3327 | Val Acc: 89.89% | Time: 130.47s
+2026-08-30 21:50:22 | INFO    | AutoScopeSelector | Epoch 02/05 | Train Loss: 0.2575 | Val Loss: 0.2809 | Val Acc: 91.82% | Time: 130.42s
+2026-08-30 21:53:03 | INFO    | AutoScopeSelector | Epoch 03/05 | Train Loss: 0.1470 | Val Loss: 0.2846 | Val Acc: 92.20% | Time: 130.29s
+2026-08-30 21:55:45 | INFO    | AutoScopeSelector | Epoch 04/05 | Train Loss: 0.0672 | Val Loss: 0.2940 | Val Acc: 92.53% | Time: 132.42s
+2026-08-30 21:59:11 | INFO    | AutoScopeSelector | Epoch 05/05 | Train Loss: 0.0277 | Val Loss: 0.2994 | Val Acc: 92.98% | Time: 170.42s
+2026-08-30 21:59:43 | INFO    | AutoScopeSelector | --- Evaluating Strategy 3: block3_4_head (Last 2 residual blocks (layer3, layer4) + Classification head) ---
+2026-08-30 21:59:43 | INFO    | AutoScopeSelector | Trainable params: 10,498,570 / 11,181,642 (93.89%)
+2026-08-30 22:02:40 | INFO    | AutoScopeSelector | Epoch 01/05 | Train Loss: 0.3714 | Val Loss: 0.2410 | Val Acc: 92.88% | Time: 142.05s
+2026-08-30 22:06:28 | INFO    | AutoScopeSelector | Epoch 02/05 | Train Loss: 0.1953 | Val Loss: 0.2025 | Val Acc: 94.40% | Time: 188.71s
+2026-08-30 22:10:02 | INFO    | AutoScopeSelector | Epoch 03/05 | Train Loss: 0.1280 | Val Loss: 0.1981 | Val Acc: 94.79% | Time: 177.86s
+2026-08-30 23:36:40 | INFO    | AutoScopeSelector | Epoch 04/05 | Train Loss: 0.0630 | Val Loss: 0.2088 | Val Acc: 94.98% | Time: 164.15s
+2026-08-30 23:39:35 | INFO    | AutoScopeSelector | Epoch 05/05 | Train Loss: 0.0248 | Val Loss: 0.2062 | Val Acc: 95.45% | Time: 145.11s
+2026-08-30 23:40:06 | INFO    | AutoScopeSelector | --- Evaluating Strategy 4: block2_3_4_head (Last 3 residual blocks (layer2, layer3, layer4) + Classification head) ---
+2026-08-30 23:40:06 | INFO    | AutoScopeSelector | Trainable params: 11,024,138 / 11,181,642 (98.59%)
+2026-08-30 23:43:35 | INFO    | AutoScopeSelector | Epoch 01/05 | Train Loss: 0.3427 | Val Loss: 0.2358 | Val Acc: 93.27% | Time: 171.22s
+2026-08-30 23:47:32 | INFO    | AutoScopeSelector | Epoch 02/05 | Train Loss: 0.1953 | Val Loss: 0.1894 | Val Acc: 94.71% | Time: 199.37s
+2026-08-30 23:51:29 | INFO    | AutoScopeSelector | Epoch 03/05 | Train Loss: 0.1317 | Val Loss: 0.1817 | Val Acc: 95.16% | Time: 199.67s
+2026-08-30 23:55:31 | INFO    | AutoScopeSelector | Epoch 04/05 | Train Loss: 0.0737 | Val Loss: 0.1818 | Val Acc: 95.57% | Time: 204.87s
+2026-08-30 23:59:30 | INFO    | AutoScopeSelector | Epoch 05/05 | Train Loss: 0.0302 | Val Loss: 0.1858 | Val Acc: 95.71% | Time: 201.72s
+2026-08-31 00:00:08 | INFO    | AutoScopeSelector | --- Evaluating Strategy 5: full_model (Full model fine-tuning (All layers unfrozen)) ---
+2026-08-31 00:00:08 | INFO    | AutoScopeSelector | Trainable params: 11,181,642 / 11,181,642 (100.00%)
+2026-08-31 00:04:44 | INFO    | AutoScopeSelector | Epoch 01/05 | Train Loss: 0.3609 | Val Loss: 0.2319 | Val Acc: 93.33% | Time: 239.23s
+2026-08-31 00:09:24 | INFO    | AutoScopeSelector | Epoch 02/05 | Train Loss: 0.2111 | Val Loss: 0.2017 | Val Acc: 94.45% | Time: 242.86s
+2026-08-31 00:14:03 | INFO    | AutoScopeSelector | Epoch 03/05 | Train Loss: 0.1479 | Val Loss: 0.1871 | Val Acc: 94.92% | Time: 242.55s
+2026-08-31 00:18:43 | INFO    | AutoScopeSelector | Epoch 04/05 | Train Loss: 0.0905 | Val Loss: 0.1826 | Val Acc: 95.37% | Time: 241.82s
+2026-08-31 00:23:35 | INFO    | AutoScopeSelector | Epoch 05/05 | Train Loss: 0.0415 | Val Loss: 0.1885 | Val Acc: 95.62% | Time: 252.28s
+2026-08-31 00:24:15 | INFO    | AutoScopeSelector | === Selection Complete ===
+2026-08-31 00:24:15 | INFO    | AutoScopeSelector | Recommended Strategy: [2] block4_head
+2026-08-31 00:24:15 | INFO    | AutoScopeSelector | Reasoning: Knee-point / Maximum curvature selection: Strategy 2 (block4_head) provides the maximum marginal accuracy gain before diminishing returns set in.
+2026-08-31 00:24:15 | INFO    | AutoScopeSelector | --- Running Post-Selection Test Evaluation on Selected Strategy [2]: block4_head ---
+2026-08-31 00:39:35 | INFO    | AutoScopeSelector | Final Test Evaluation Result -> Accuracy: 92.40% | Loss: 0.2829 | F1: 0.9179
+2026-08-31 00:39:35 | INFO    | AutoScopeSelector | Saved selected model checkpoint to: ./outputs_svhn\checkpoints\selected_model.pt
+2026-08-31 00:39:35 | INFO    | AutoScopeSelector | 
+================================================================================
+STRATEGY EVALUATION SUMMARY (Validation Search)
+================================================================================
+| ID | Strategy Name   | Trainable Params | Param % | Val Acc (%) | Test Acc (%) | Val Loss | Val F1 | Epoch Time (s) | Cost  | Pareto |
+| -- | --------------- | ---------------- | ------- | ----------- | ------------ | -------- | ------ | -------------- | ----- | ------ |
+| 1  | head_only       | 5,130            | 0.05%   | 43.78%      | 0.00%        | 1.6712   | 0.4000 | 119.73s        | 0.000 | Yes    |
+| 2  | block4_head     | 8,398,858        | 75.11%  | 92.98%      | 92.40%       | 0.2994   | 0.9264 | 138.80s        | 0.452 | Yes    |
+| 3  | block3_4_head   | 10,498,570       | 93.89%  | 95.45%      | 0.00%        | 0.2062   | 0.9522 | 163.58s        | 0.646 | Yes    |
+| 4  | block2_3_4_head | 11,024,138       | 98.59%  | 95.71%      | 0.00%        | 0.1858   | 0.9552 | 195.37s        | 0.798 | Yes    |
+| 5  | full_model      | 11,181,642       | 100.00% | 95.62%      | 0.00%        | 0.1885   | 0.9548 | 243.75s        | 1.000 | No     |
+================================================================================
+2026-08-31 00:39:35 | INFO    | AutoScopeSelector | Saved results to: ./outputs_svhn\results\selection_results.json
+2026-08-31 00:39:35 | INFO    | AutoScopeSelector | Saved reproducibility metadata to: ./outputs_svhn\results\reproducibility_metadata.json
+2026-08-31 00:39:37 | INFO    | AutoScopeSelector | Saved all 5 experiment comparison figures to: ./outputs_svhn\figures

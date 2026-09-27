@@ -1,0 +1,460 @@
+[
+  {
+    "architecture_name": "resnet18",
+    "family": "resnet",
+    "total_parameters": 11181642,
+    "classification_head": {
+      "name": "fc",
+      "param_count": 5130,
+      "tensor_count": 2,
+      "tensors": [
+        "fc.weight",
+        "fc.bias"
+      ]
+    },
+    "stem": {
+      "name": "stem",
+      "param_count": 9536,
+      "tensor_count": 3,
+      "sample_tensors": [
+        "conv1.weight",
+        "bn1.weight",
+        "bn1.bias"
+      ]
+    },
+    "stages": [
+      {
+        "stage_idx": 1,
+        "stage_name": "layer1",
+        "param_count": 147968,
+        "tensor_count": 12,
+        "sample_tensors": [
+          "layer1.0.conv1.weight",
+          "layer1.0.bn1.weight",
+          "layer1.0.bn1.bias",
+          "layer1.0.conv2.weight"
+        ]
+      },
+      {
+        "stage_idx": 2,
+        "stage_name": "layer2",
+        "param_count": 525568,
+        "tensor_count": 15,
+        "sample_tensors": [
+          "layer2.0.conv1.weight",
+          "layer2.0.bn1.weight",
+          "layer2.0.bn1.bias",
+          "layer2.0.conv2.weight"
+        ]
+      },
+      {
+        "stage_idx": 3,
+        "stage_name": "layer3",
+        "param_count": 2099712,
+        "tensor_count": 15,
+        "sample_tensors": [
+          "layer3.0.conv1.weight",
+          "layer3.0.bn1.weight",
+          "layer3.0.bn1.bias",
+          "layer3.0.conv2.weight"
+        ]
+      },
+      {
+        "stage_idx": 4,
+        "stage_name": "layer4",
+        "param_count": 8393728,
+        "tensor_count": 15,
+        "sample_tensors": [
+          "layer4.0.conv1.weight",
+          "layer4.0.bn1.weight",
+          "layer4.0.bn1.bias",
+          "layer4.0.conv2.weight"
+        ]
+      }
+    ],
+    "fine_tuning_scopes": [
+      {
+        "strategy_id": 1,
+        "name": "head_only",
+        "description": "Linear probing (Classification head only)",
+        "unfrozen_targets": [
+          "fc"
+        ],
+        "trainable_parameters": 5130,
+        "frozen_parameters": 11176512,
+        "total_parameters": 11181642,
+        "trainable_percentage": 0.0459
+      },
+      {
+        "strategy_id": 2,
+        "name": "block4_head",
+        "description": "Last residual block (layer4) + Classification head",
+        "unfrozen_targets": [
+          "layer4",
+          "fc"
+        ],
+        "trainable_parameters": 8398858,
+        "frozen_parameters": 2782784,
+        "total_parameters": 11181642,
+        "trainable_percentage": 75.1129
+      },
+      {
+        "strategy_id": 3,
+        "name": "block3_4_head",
+        "description": "Last 2 residual blocks (layer3, layer4) + Classification head",
+        "unfrozen_targets": [
+          "layer3",
+          "layer4",
+          "fc"
+        ],
+        "trainable_parameters": 10498570,
+        "frozen_parameters": 683072,
+        "total_parameters": 11181642,
+        "trainable_percentage": 93.8911
+      },
+      {
+        "strategy_id": 4,
+        "name": "block2_3_4_head",
+        "description": "Last 3 residual blocks (layer2, layer3, layer4) + Classification head",
+        "unfrozen_targets": [
+          "layer2",
+          "layer3",
+          "layer4",
+          "fc"
+        ],
+        "trainable_parameters": 11024138,
+        "frozen_parameters": 157504,
+        "total_parameters": 11181642,
+        "trainable_percentage": 98.5914
+      },
+      {
+        "strategy_id": 5,
+        "name": "full_model",
+        "description": "Full model fine-tuning (All layers unfrozen)",
+        "unfrozen_targets": [
+          "conv1",
+          "bn1",
+          "layer1",
+          "layer2",
+          "layer3",
+          "layer4",
+          "fc"
+        ],
+        "trainable_parameters": 11181642,
+        "frozen_parameters": 0,
+        "total_parameters": 11181642,
+        "trainable_percentage": 100.0
+      }
+    ]
+  },
+  {
+    "architecture_name": "efficientnet_b0",
+    "family": "efficientnet",
+    "total_parameters": 4020358,
+    "classification_head": {
+      "name": "classifier",
+      "param_count": 12810,
+      "tensor_count": 2,
+      "tensors": [
+        "classifier.1.weight",
+        "classifier.1.bias"
+      ]
+    },
+    "stem": {
+      "name": "features.0",
+      "param_count": 928,
+      "tensor_count": 3,
+      "sample_tensors": [
+        "features.0.0.weight",
+        "features.0.1.weight",
+        "features.0.1.bias"
+      ]
+    },
+    "stages": [
+      {
+        "stage_idx": 1,
+        "stage_name": "stage1",
+        "param_count": 18162,
+        "tensor_count": 36,
+        "sample_tensors": [
+          "features.1.0.block.0.0.weight",
+          "features.1.0.block.0.1.weight",
+          "features.1.0.block.0.1.bias",
+          "features.1.0.block.1.fc1.weight"
+        ]
+      },
+      {
+        "stage_idx": 2,
+        "stage_name": "stage2",
+        "param_count": 289570,
+        "tensor_count": 65,
+        "sample_tensors": [
+          "features.3.0.block.0.0.weight",
+          "features.3.0.block.0.1.weight",
+          "features.3.0.block.0.1.bias",
+          "features.3.0.block.1.0.weight"
+        ]
+      },
+      {
+        "stage_idx": 3,
+        "stage_name": "stage3",
+        "param_count": 2569496,
+        "tensor_count": 91,
+        "sample_tensors": [
+          "features.5.0.block.0.0.weight",
+          "features.5.0.block.0.1.weight",
+          "features.5.0.block.0.1.bias",
+          "features.5.0.block.1.0.weight"
+        ]
+      },
+      {
+        "stage_idx": 4,
+        "stage_name": "stage4",
+        "param_count": 1129392,
+        "tensor_count": 16,
+        "sample_tensors": [
+          "features.7.0.block.0.0.weight",
+          "features.7.0.block.0.1.weight",
+          "features.7.0.block.0.1.bias",
+          "features.7.0.block.1.0.weight"
+        ]
+      }
+    ],
+    "fine_tuning_scopes": [
+      {
+        "strategy_id": 1,
+        "name": "head_only",
+        "description": "Linear probing (Classifier head only)",
+        "unfrozen_targets": [
+          "classifier"
+        ],
+        "trainable_parameters": 12810,
+        "frozen_parameters": 4007548,
+        "total_parameters": 4020358,
+        "trainable_percentage": 0.3186
+      },
+      {
+        "strategy_id": 2,
+        "name": "stage4_head",
+        "description": "Deepest MBConv blocks (features.7, 8) + Classifier head",
+        "unfrozen_targets": [
+          "features.7",
+          "features.8",
+          "classifier"
+        ],
+        "trainable_parameters": 1142202,
+        "frozen_parameters": 2878156,
+        "total_parameters": 4020358,
+        "trainable_percentage": 28.4105
+      },
+      {
+        "strategy_id": 3,
+        "name": "stage3_4_head",
+        "description": "Deepest 4 MBConv blocks (features.5-8) + Classifier head",
+        "unfrozen_targets": [
+          "features.5",
+          "features.6",
+          "features.7",
+          "features.8",
+          "classifier"
+        ],
+        "trainable_parameters": 3711698,
+        "frozen_parameters": 308660,
+        "total_parameters": 4020358,
+        "trainable_percentage": 92.3226
+      },
+      {
+        "strategy_id": 4,
+        "name": "stage2_3_4_head",
+        "description": "Upper MBConv hierarchy (features.3-8) + Classifier head",
+        "unfrozen_targets": [
+          "features.3",
+          "features.4",
+          "features.5",
+          "features.6",
+          "features.7",
+          "features.8",
+          "classifier"
+        ],
+        "trainable_parameters": 4001268,
+        "frozen_parameters": 19090,
+        "total_parameters": 4020358,
+        "trainable_percentage": 99.5252
+      },
+      {
+        "strategy_id": 5,
+        "name": "full_model",
+        "description": "Full model fine-tuning (All MBConv blocks & Stem unfrozen)",
+        "unfrozen_targets": [
+          "features",
+          "classifier"
+        ],
+        "trainable_parameters": 4020358,
+        "frozen_parameters": 0,
+        "total_parameters": 4020358,
+        "trainable_percentage": 100.0
+      }
+    ]
+  },
+  {
+    "architecture_name": "vit_b_16",
+    "family": "vit",
+    "total_parameters": 85806346,
+    "classification_head": {
+      "name": "heads",
+      "param_count": 7690,
+      "tensor_count": 2,
+      "tensors": [
+        "heads.head.weight",
+        "heads.head.bias"
+      ]
+    },
+    "stem": {
+      "name": "stem",
+      "param_count": 742656,
+      "tensor_count": 4,
+      "sample_tensors": [
+        "class_token",
+        "conv_proj.weight",
+        "conv_proj.bias",
+        "encoder.pos_embedding"
+      ]
+    },
+    "stages": [
+      {
+        "stage_idx": 1,
+        "stage_name": "stage1",
+        "param_count": 21263616,
+        "tensor_count": 36,
+        "sample_tensors": [
+          "encoder.layers.encoder_layer_0.ln_1.weight",
+          "encoder.layers.encoder_layer_0.ln_1.bias",
+          "encoder.layers.encoder_layer_0.self_attention.in_proj_weight",
+          "encoder.layers.encoder_layer_0.self_attention.in_proj_bias"
+        ]
+      },
+      {
+        "stage_idx": 2,
+        "stage_name": "stage2",
+        "param_count": 21263616,
+        "tensor_count": 36,
+        "sample_tensors": [
+          "encoder.layers.encoder_layer_3.ln_1.weight",
+          "encoder.layers.encoder_layer_3.ln_1.bias",
+          "encoder.layers.encoder_layer_3.self_attention.in_proj_weight",
+          "encoder.layers.encoder_layer_3.self_attention.in_proj_bias"
+        ]
+      },
+      {
+        "stage_idx": 3,
+        "stage_name": "stage3",
+        "param_count": 21263616,
+        "tensor_count": 36,
+        "sample_tensors": [
+          "encoder.layers.encoder_layer_6.ln_1.weight",
+          "encoder.layers.encoder_layer_6.ln_1.bias",
+          "encoder.layers.encoder_layer_6.self_attention.in_proj_weight",
+          "encoder.layers.encoder_layer_6.self_attention.in_proj_bias"
+        ]
+      },
+      {
+        "stage_idx": 4,
+        "stage_name": "stage4",
+        "param_count": 21265152,
+        "tensor_count": 38,
+        "sample_tensors": [
+          "encoder.layers.encoder_layer_9.ln_1.weight",
+          "encoder.layers.encoder_layer_9.ln_1.bias",
+          "encoder.layers.encoder_layer_9.self_attention.in_proj_weight",
+          "encoder.layers.encoder_layer_9.self_attention.in_proj_bias"
+        ]
+      }
+    ],
+    "fine_tuning_scopes": [
+      {
+        "strategy_id": 1,
+        "name": "head_only",
+        "description": "Linear probing (ViT classification head only)",
+        "unfrozen_targets": [
+          "heads"
+        ],
+        "trainable_parameters": 7690,
+        "frozen_parameters": 85798656,
+        "total_parameters": 85806346,
+        "trainable_percentage": 0.009
+      },
+      {
+        "strategy_id": 2,
+        "name": "top_quarter_head",
+        "description": "Top 3 Transformer layers (layers 9-11 + LN) + Head",
+        "unfrozen_targets": [
+          "encoder.layers.encoder_layer_9",
+          "encoder.layers.encoder_layer_10",
+          "encoder.layers.encoder_layer_11",
+          "encoder.ln",
+          "heads"
+        ],
+        "trainable_parameters": 21272842,
+        "frozen_parameters": 64533504,
+        "total_parameters": 85806346,
+        "trainable_percentage": 24.7917
+      },
+      {
+        "strategy_id": 3,
+        "name": "top_half_head",
+        "description": "Top 6 Transformer layers (layers 6-11 + LN) + Head",
+        "unfrozen_targets": [
+          "encoder.layers.encoder_layer_6",
+          "encoder.layers.encoder_layer_7",
+          "encoder.layers.encoder_layer_8",
+          "encoder.layers.encoder_layer_9",
+          "encoder.layers.encoder_layer_10",
+          "encoder.layers.encoder_layer_11",
+          "encoder.ln",
+          "heads"
+        ],
+        "trainable_parameters": 42536458,
+        "frozen_parameters": 43269888,
+        "total_parameters": 85806346,
+        "trainable_percentage": 49.5726
+      },
+      {
+        "strategy_id": 4,
+        "name": "top_three_quarters_head",
+        "description": "Top 9 Transformer layers (layers 3-11 + LN) + Head",
+        "unfrozen_targets": [
+          "encoder.layers.encoder_layer_3",
+          "encoder.layers.encoder_layer_4",
+          "encoder.layers.encoder_layer_5",
+          "encoder.layers.encoder_layer_6",
+          "encoder.layers.encoder_layer_7",
+          "encoder.layers.encoder_layer_8",
+          "encoder.layers.encoder_layer_9",
+          "encoder.layers.encoder_layer_10",
+          "encoder.layers.encoder_layer_11",
+          "encoder.ln",
+          "heads"
+        ],
+        "trainable_parameters": 63800074,
+        "frozen_parameters": 22006272,
+        "total_parameters": 85806346,
+        "trainable_percentage": 74.3536
+      },
+      {
+        "strategy_id": 5,
+        "name": "full_model",
+        "description": "Full model fine-tuning (All Transformer layers, Stem & Head unfrozen)",
+        "unfrozen_targets": [
+          "conv_proj",
+          "class_token",
+          "encoder",
+          "heads"
+        ],
+        "trainable_parameters": 85806346,
+        "frozen_parameters": 0,
+        "total_parameters": 85806346,
+        "trainable_percentage": 100.0
+      }
+    ]
+  }
+]
